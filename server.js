@@ -58,6 +58,6 @@ app.use('/api/eventpost',Everouter);
 app.use('/api/coursemodel',modelroutes);
 // Start the server
 
-// Start the server
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
