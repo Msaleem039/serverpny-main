@@ -9,7 +9,7 @@ const categorySchema = new mongoose.Schema({
   in_Sitemap: { type: Boolean, default: false },
   index_Page_Option: { type: Boolean, default: false },
   custom_Canonical_Url: { type: String },
-  category_Icons: { type: String }
+  // category_Icons: { type: String }
 });
 
 const Category = mongoose.model('Category', categorySchema);
