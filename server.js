@@ -26,10 +26,15 @@ const app = express();
 app.use('/uploads', express.static('uploads'));
 app.use(express.json({ limit: "10mb" }));
 // CORS Middleware Configuration
-const allowedOrigins = ['http://localhost:5173', 'https://backend-pny.vercel.app'];
+const allowedOrigins = [
+    'http://localhost:5173', 
+    'http://localhost:10001', // Add more ports or domains as needed
+    'https://backend-pny.vercel.app',
+];
 
 app.use(cors({
     origin: function (origin, callback) {
+        // Allow requests from allowed origins or requests without origin (Postman, server-side)
         if (allowedOrigins.includes(origin) || !origin) {
             callback(null, true);
         } else {
@@ -37,9 +42,10 @@ app.use(cors({
         }
     },
     credentials: true, // Enable sending cookies and credentials
-    methods: 'GET, POST, PUT, DELETE, OPTIONS', // Allow these methods
-    allowedHeaders: 'Content-Type, Authorization', // Allowed headers
+    methods: 'GET, POST, PUT, DELETE, OPTIONS', // Allowed HTTP methods
+    allowedHeaders: 'Content-Type, Authorization', // Allowed request headers
 }));
+
 // API routes
 app.use('/api/categories',categoryRoutes);
 app.use('/api/instructors',instructorRoutes);
