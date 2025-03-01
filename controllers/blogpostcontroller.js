@@ -1,7 +1,5 @@
 import BlogCityCategory from "../models/blogpost.js"; // Ensure this imports the correct model
 import { uploadFiles } from "../multer/multerConfig.js";
-
-
 // Get all city categories
 export const getAllBlog = async (req, res) => {
   try {
@@ -11,7 +9,6 @@ export const getAllBlog = async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch city categories', error });
   }
 };
-
 // Create new city category
 export const createNewBlog = async (req, res) => {
   uploadFiles(req, res, async (err) => {
