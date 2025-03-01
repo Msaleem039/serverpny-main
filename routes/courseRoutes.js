@@ -14,7 +14,7 @@ import {
 } from '../controllers/courseController.js';
 const courseRoutes = express.Router();
 courseRoutes.post('/', createCourse);
-courseRoutes.get("/", getallCourses)
+courseRoutes.get("/?", getallCourses)
 // courseRoutes.get('/', getCourses);
 // courseRoutes.get('/:id', getCourseById);
 // courseRoutes.get('/:courseSlug', getCourseBySlug);
@@ -25,7 +25,7 @@ courseRoutes.get("/", getallCourses)
 
 // courseRoutes.get('/category/slug/:categorySlug', getCoursesByCategorySlug);
 courseRoutes.get('/:categorySlug', getCoursesByCategorySlug);
-courseRoutes.get('/:categoryId',getCoursesByName);
+// courseRoutes.get('/:courseySlug',getCoursesByName);
 export default courseRoutes;
 
 // https://www.pnytrainings.com/courses/marketing

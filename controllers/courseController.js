@@ -47,11 +47,11 @@ export const getallCourses = async (req, res) =>{
 export const getCoursesByCategorySlug = async (req, res) => {
   try {
     const { categorySlug } = req.params;
-    const category = await Category.findOne({ url_Slug: categorySlug });
-    if (!category) {
-      return res.status(404).json({ message: 'Category not found' });
-    }
-    const courses = await Course.find({ course_Category: category._id }).populate('course_Category');
+    // const category = await Course.findOne({ url_Slug: categorySlug });
+    // if (!category) {
+    //   return res.status(404).json({ message: 'Category not found' });
+    // }
+    const courses = await Course.find({ url_Slug: categorySlug }).populate('course_Category');
     res.status(200).json(courses);
   } catch (error) {
     res.status(500).json({ message: error.message });

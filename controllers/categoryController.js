@@ -213,10 +213,10 @@ export const deleteCategory = async (req, res) => {
 
 export const getCategoryBySlug = async (req, res) => {
   try {
-    const { slug } = req.params;
+    const { url_Slug } = req.params;
 
     // Find the category
-    const category = await Category.findOne({ url_Slug: slug });
+    const category = await Category.findOne({ url_Slug: url_Slug });
 
     if (!category) {
       return res.status(404).json({ message: 'Category not found' });

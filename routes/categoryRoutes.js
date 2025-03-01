@@ -18,7 +18,7 @@ import {
 
 const categoryRoutes = express.Router();
 
-categoryRoutes.get("/", getCategories);
+categoryRoutes.get("/api/category", getCategories);
 categoryRoutes.post("/", createCategory);
 categoryRoutes.get("/:id", getCategoryById);
 categoryRoutes.put("/:id", updateCategory);
@@ -34,7 +34,7 @@ categoryRoutes.delete("/:id", deleteCategory);
 // router.put('/:id', updateCategory);
 // router.delete('/:id', deleteCategory);
 
-categoryRoutes.get('/courses/:slug',getCategoryBySlug);
+categoryRoutes.get('/api/category/:url_Slug',getCategoryBySlug);
 
 export default categoryRoutes;
 // import express from 'express';

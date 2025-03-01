@@ -49,9 +49,10 @@ app.use(cors({
     allowedHeaders: 'Content-Type, Authorization', // Allowed request headers
 }));
 // API routes
-app.use('/api',categoryRoutes);
+app.use('/',categoryRoutes);
+// app.use('/api',categoryRoutes);
 app.use('/api/instructors',instructorRoutes);
-app.use('/courses',courseRoutes);
+app.use('/api/course',courseRoutes);
 app.use('/api/blogpost',blogpostrouter);
 app.use('/api/blogcate',blogcatroutes);
 app.use('/api/specialcatblog',specialBroutes);
