@@ -12,7 +12,6 @@ export const createBlogPost = async (req, res) => {
         const blogData = {
           ...req.body,
           postThumbnailImage: blogImage,
-          
         };
         const special = new SBlogPost(blogData);
         await special.save();

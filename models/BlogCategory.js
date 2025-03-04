@@ -1,42 +1,19 @@
 import mongoose from "mongoose";
 
-// Define Category Schema
-const categorySchema = new mongoose.Schema({
-  categoryName: {
-    type: String,
-    required: true,
-  },
-  urlSlug: {
-    type: String,
-  },
-  shortDescription: {
-    type: String,
-  },
-  metaTitle: {
-    type: String,
-  },
-  metaDescription: {
-    type: String,
-  },
-  inSitemap: {
-    type: Boolean,
-    required: true,
-    enum: [true, false],
-  },
-  indexPage: {
-    type: Boolean,
-    required: true,
-    enum: [true, false],
-  },
-  canonicalUrl: {
-    type: String,
-  },
+const BlogcategorySchema = new mongoose.Schema({
+  categoryName: { type: String, required: true },
+  urlSlug: { type: String, required: true, unique: true, lowercase: true },
+  shortDescription: { type: String },
+  metaTitle: { type: String },
+  metaDescription: { type: String },
+  inSitemap: { type: Boolean, required: true, default: false },
+  indexPage: { type: Boolean, required: true, default: false },
+  canonicalUrl: { type: String },
   blogs: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'BlogPost',
+    ref: 'infoBlogPost', // ✅ Correct reference
   }],
 }, { timestamps: true });
 
-const BlogCategory = mongoose.model('BlogCategory', categorySchema);
-
-export default BlogCategory
+const BlogCategory = mongoose.model('BlogCategory', BlogcategorySchema);
+export default BlogCategory;

@@ -54,9 +54,10 @@ app.use('/',categoryRoutes);
 app.use('/api/instructors',instructorRoutes);
 app.use('/api/course',courseRoutes);
 app.use('/api/blogpost',blogpostrouter);
-app.use('/api/blogcate',blogcatroutes);
+app.use('/',blogcatroutes);
+// special city wise 
 app.use('/api/specialcatblog',specialBroutes);
-app.use('/api/citycategory',specialcityroutes);
+app.use('/api',specialcityroutes);
 app.use('/api/eflyer',router);
 app.use('/api/faqcat',routerfaq);
 app.use('/api/faquestion',routerquestion);

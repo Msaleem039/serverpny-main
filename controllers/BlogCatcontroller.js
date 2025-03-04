@@ -1,6 +1,6 @@
 
 import BlogCategory from '../models/BlogCategory.js';
-import cloudinary from '../lib/cloudinary.js';
+import infoBlogPost from '../models/infoBlogPost.js';
 // import BlogPost from '../models/blogpost.js';
 // Add a new category
 export const CreateblogCategory = async (req, res) => {
@@ -58,25 +58,45 @@ try {
       res.status(500).json({ message: 'Failed to delete category', error });
     }
   };
- //  // Fetch all blogs in a category
-// Add a blog to a category
-// export const addBlogToCategory = async (req, res) => {
-//   try {
-//     const { blogId, categoryId } = req.body;
 
-//     const category = await BlogCategory.findById(categoryId);
-//     if (!category) {
-//       return res.status(404).json({ message: 'Category not found' });
-//     }
+  export const getBlogsByCategorySlug = async (req, res) => {
+    try {
+        const { urlSlug } = req.params;
 
-//     // Add the blog to the category
-//     category.BlogPost.push(blogId);
-//     await category.save();
+        // Find the category and populate the blogs field
+        const category = await BlogCategory.findOne({ urlSlug }).populate({
+            path: 'blogs',
+            select: 'postTitle urlSlug postThumbnailImage shortDescription postDescription isPublish featured createdAt'
+        });
 
-//     res.status(200).json({ message: 'Blog added to category successfully', category });
-//   } catch (error) {
-//     res.status(500).json({ message: 'Failed to add blog to category', error });
-//   }
-// };
+        if (!category) {
+            return res.status(404).json({ message: 'Blog category not found' });
+        }
 
-// // Fetch a blog by ID
+        // Transform response
+        const response = {
+            _id: category._id,
+            categoryName: category.categoryName,
+            urlSlug: category.urlSlug,
+            shortDescription: category.shortDescription,
+            metaTitle: category.metaTitle,
+            metaDescription: category.metaDescription,
+            blogs: category.blogs.map(blog => ({
+                id: blog._id.toString(),
+                title: blog.postTitle,
+                thumbnail: blog.postThumbnailImage,
+                short_description: blog.shortDescription,
+                description: blog.postDescription,
+                url_slug: blog.urlSlug,
+                is_published: blog.isPublish,
+                featured: blog.featured,
+                created_at: blog.createdAt,
+            })),
+        };
+
+        res.status(200).json(response);
+    } catch (error) {
+        console.error('Error fetching blogs:', error);
+        res.status(500).json({ message: 'Internal server error', error });
+    }
+};

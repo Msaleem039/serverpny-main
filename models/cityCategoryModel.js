@@ -9,6 +9,7 @@ const cityCategorySchema = new mongoose.Schema({
     inSitemap: { type: Boolean, default: false },
     pageIndex: { type: Boolean, default: false },
     customCanonicalUrl: { type: String },
+    sblogposts:[{ type: mongoose.Schema.Types.ObjectId, ref: 'sBlogPost' }]
 });
 
 const CityCategory = mongoose.model('CityCategory', cityCategorySchema);

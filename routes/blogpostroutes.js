@@ -1,8 +1,6 @@
 // routes/cityCategoryRoutes.js
 import express from 'express';
 import { createNewBlog, deleteBlog, getAllBlog, getBlogById, updateBlog } from '../controllers/blogpostcontroller.js';
-import { upload } from '../middlewar/multer.js';
-
 
 const blogpostrouter = express.Router();
 
